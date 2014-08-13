@@ -13,7 +13,6 @@ void loop()
   int potVal;
   int n;
   
-  
   potVal = analogRead(potPin);
   
   n = map(potVal, 0, 1023, -180, 180);
