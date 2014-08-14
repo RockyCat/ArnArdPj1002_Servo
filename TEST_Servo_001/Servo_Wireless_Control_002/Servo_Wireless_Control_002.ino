@@ -3,39 +3,44 @@ int servoPin = A0;
 
 boolean ledStatus;
 
-void setup()
-{
-  Serial.begin(9600);
+void setup
+  Serial.begin(115200);
   pinMode(potPin, INPUT);
   pinMode(servoPin, OUTPUT);
   
-  pinMode(13, OUTPUT);
-  digitalWrite(13, LOW);
+  servoAngle(0);
+  servoAngle(0);
+  servoAngle(0);
+  servoAngle(0);
   
-  servoAngle(0);
-  servoAngle(0);
-  servoAngle(0);
-  servoAngle(0);
   delay(5000);
 }
 
-void loop()
+void loop()  
 {
-  int potVal;
+  int income;
   int n;
   
 //  potVal = analogRead(potPin);
   
   do {
-    potVal = Serial.read();
+    income = Serial.read();
+//    Serial.print(income);
+    
+//    pinMode(13, OUTPUT);
+//    digitalWrite(13, LOW);
+
   } while (Serial.available() > 0);
   
   
-  digitalWrite(13, HIGH);
-  delay(100);
-  digitalWrite(13, LOW);
+//  digitalWrite(13, HIGH);
+//  delay(100);
+//  digitalWrite(13, LOW);
   
-  n = map(potVal, 0, 255, -180, 180);
+  n = map(income, 0, 9, 0, 180);
+  
+  constrain(income, 0, 9);
+  constrain(n, 0, 180);
   
   servoAngle(n);
 }
@@ -44,7 +49,7 @@ void servoAngle(int angle)
 {
   int pulseWidth;
   
-  pulseWidth = map(angle, -180, 180, 220, 2560);
+  pulseWidth = map(angle, 0, 180, 220, 2560);
   digitalWrite(servoPin, HIGH);
   delayMicroseconds(pulseWidth);
   
@@ -57,3 +62,4 @@ void servoAngle(int angle)
 //  
   delay(5);
 }
+
